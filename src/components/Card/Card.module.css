@@ -1,0 +1,96 @@
+.card {
+    /* width: calc(45% - 10px); */
+    width: 30%;
+    margin: 5px;
+    position: relative;
+    font-size: 0.8rem;
+}
+
+.card__image {
+    height: 20rem;
+    max-width: 20rem;
+    background-color: red;
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    position: relative;
+    transition: all ease-in-out 0.35s;
+}
+
+/* .card__image:hover {
+    z-index: 99;
+    scale: 1.1;
+} */
+
+.card__description {
+    /* height: 20rem; */
+    width: 20rem;
+    background-color: #ffffffe7;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    overflow: hidden;
+
+    position: absolute;
+    top: 6%;
+    left: 8%;
+}
+
+.card__headColor {
+    display: block;
+    background-color: rebeccapurple;
+    width: 100%;
+    height: 0.3rem;
+}
+
+.card__imageChild {
+    height: 20rem;
+    width: 100%;
+    backdrop-filter: blur(25px);
+    /* z-index: 99; */
+}
+
+.card__area {
+    padding: 1rem 1.2rem;
+}
+
+.card__area_name {
+    color: white;
+    background-color: #845ef79a;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+}
+
+.card__area_details {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.card__scoreParent {
+    font-weight: 600;
+    margin: 0.6rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.card__btn_parent {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.card__btn {
+    color: #845ef79a;
+    border: 1px solid #845ef7;
+    padding: 0.5rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all ease-in-out 0.25s;
+}
+
+.card__btn:hover {
+    background-color: #845ef79a;
+    color: white;
+}
