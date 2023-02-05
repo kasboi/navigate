@@ -31,15 +31,15 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {/* <Navbar />
+            <Navbar />
             <Header />
             <main className={styles.main}>
                 <div className={styles.card__grid}>
                     {isLoading && <Skeleton />}
                     {data && <Card data={data["_links"]["ua:item"]}/>}
                 </div>
-            </main> */}
-            <Modal />
+            </main>
+            {/* <Modal /> */}
         </>
     )
 }
