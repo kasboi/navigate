@@ -2,13 +2,16 @@ import styles from "./Card.module.css"
 import Image from "next/image"
 import lagos from "../../../public/lagos.jpg"
 
-import { ProgressBar } from "react-step-progress-bar"
+// import { ProgressBar } from "react-step-progress-bar"
+const { ProgressBar } = require("react-step-progress-bar")
 
 import { useState, useRef, useEffect } from "react"
 import Skeleton from "../Skeleton/Skeleton"
+import MyModal from "../Modal/Modal"
 
 interface DataItem {
     name: string
+    href: string
 }
 
 interface Props {
@@ -24,7 +27,8 @@ type AppProps = {
 
 const Card = ({ data }: AppProps) => {
     const [displayData, setDisplayData] = useState<DataItem[]>([])
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+
     const observerRef = useRef<HTMLDivElement | null>(null)
     const intersectionObserverRef = useRef<IntersectionObserver | null>(null)
 
@@ -33,12 +37,15 @@ const Card = ({ data }: AppProps) => {
             intersectionObserverRef.current = new IntersectionObserver(
                 (entries) => {
                     if (entries[0].isIntersecting) {
-                        setIsLoading(true);
+                        setIsLoading(true)
                         setDisplayData((prevData) => [
-                          ...prevData,
-                          ...data.slice(prevData.length, prevData.length + 10),
-                        ]);
-                        setIsLoading(false);
+                            ...prevData,
+                            ...data.slice(
+                                prevData.length,
+                                prevData.length + 10
+                            ),
+                        ])
+                        setIsLoading(false)
                     }
                 },
                 { root: null, rootMargin: "0px", threshold: 1.0 }
@@ -110,7 +117,9 @@ const Card = ({ data }: AppProps) => {
                                 </div>
                             </div>
                             <div className={styles.card__btn_parent}>
-                                <button className={styles.card__btn}>
+                                <button
+                                    className={styles.card__btn}
+                                >
                                     More Details
                                 </button>
                             </div>
@@ -118,6 +127,7 @@ const Card = ({ data }: AppProps) => {
                     </div>
                 </div>
             ))}
+            {/* <MyModal isOpen={isOpen} setIsOpen={setIsOpen} slug={slug} /> */}
             {isLoading && <Skeleton />}
             <div ref={observerRef} style={{ height: "1px", width: "1px" }} />
         </>

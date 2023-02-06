@@ -1,33 +1,52 @@
-.modal__overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* display: flex;
   align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s, visibility 0.5s;
+  justify-content: center; */
+  z-index: 10;
 }
 
-.modal-overlay.show {
-  opacity: 1;
-  visibility: visible;
-}
-
-.modal {
+.modalContent {
+  max-width: 520px;
+  height: 85vh;
+  margin: 0 auto;
   background-color: white;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 20px;
-  width: 500px;
-  transform: scale(0);
-  transition: transform 0.5s;
+  /* padding: 0 1rem; */
+  border-radius: 6px;
+  /* overflow: hidden; */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
 }
 
-.modal.show {
-  transform: scale(1);
+.card__imageChild {
+  height: 10rem;
+  width: 100%;
+}
+
+.life__quality {
+  padding: 0 1rem;
+  margin: .75rem 0;
+}
+
+.quality__list_parent {
+  list-style: none;
+}
+.quality__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 1rem;
+}
+.progressBar {
+  width: 100px;
+}
+.quality__heading {
+  padding-bottom: .5rem;
 }
