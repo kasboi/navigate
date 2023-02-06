@@ -11,10 +11,16 @@
         margin: 0;
     }
 }
-@media (max-width: 940px) {
+@media (max-width: 960px) {
     .card {
         width: 45%;
         margin: 0;
+    }
+}
+@media (max-width: 715px) {
+    .card {
+        width: 45%;
+        margin-left: -2.2rem;
     }
 }
 
@@ -45,6 +51,11 @@
     .card__image {
         height: 18rem;
         max-width: 18rem;
+    }
+}
+@media (max-width: 700px) {
+    .card__image {
+        max-width: 22.5rem;
     }
 }
 
