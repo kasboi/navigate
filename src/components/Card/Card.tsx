@@ -82,7 +82,7 @@ const Card = ({ data }: AppProps) => {
     return (
         <>
             {displayData.map((item, index: number) => (
-                <div className={styles.card}>
+                <div className={styles.card} key={index}>
                     <div className={styles.card__image}>
                         <Image
                             src={lagos}

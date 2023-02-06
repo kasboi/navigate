@@ -2,7 +2,8 @@ import styles from "./Skeleton.module.css"
 import Image from "next/image"
 import lagos from "../../../public/lagos.jpg"
 
-import { ProgressBar } from "react-step-progress-bar"
+const { ProgressBar } = require("react-step-progress-bar")
+
 
 const seet: any = Array.from({length: 6})
 
