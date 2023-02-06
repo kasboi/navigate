@@ -126,3 +126,44 @@
     background: #7048e8;
     color: white;
 }
+
+.picture__container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 1rem;
+}
+.picture__text {
+    font-size: .85rem;
+    color: #495057;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+}
+.modal__content {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    padding: .35rem;
+    border-radius: 0.5rem;
+    position: relative;
+    text-align: center;
+}
+.modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

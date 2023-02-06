@@ -5,6 +5,7 @@ import { InferGetServerSidePropsType } from "next"
 import { GetServerSideProps } from "next"
 import ProgressBar from "@/components/ProgressBar/ProgressBar"
 import Image from "next/image"
+import { useState, useRef, useEffect } from "react"
 
 type Image = {
     web: string
@@ -97,16 +98,47 @@ const UrbanArea = ({ img, score, salaries }: AppProps) => {
     const router = useRouter()
     const { slug } = router.query
 
-    const handleTitle = (title: any): string => {
-        return title.charAt(0).toUpperCase() + title.slice(1);
+    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const modalRef = useRef<HTMLDivElement>(null)
+
+    const handleClickOutside = (event: MouseEvent) => {
+        if (
+            modalRef.current &&
+            !modalRef.current.contains(event.target as Node)
+        ) {
+            setIsOpen(false)
+        }
     }
+
+    const handleTitle = (title: any): string => {
+        return title.charAt(0).toUpperCase() + title.slice(1)
+    }
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
 
     return (
         <>
             <Header />
             <div className={styles.card__container}>
-                <img src={img.web} alt="city" className={styles.card__image} />
-                <h1 className={styles.card__heading}>- {handleTitle(slug)} -</h1>
+                <img
+                    src={img.web}
+                    alt="city"
+                    className={styles.card__image}
+                    onClick={() => setIsOpen(true)}
+                />
+                <span className={styles.picture__container}>
+                    <em className={styles.picture__text}>
+                        *click to view picture
+                    </em>
+                </span>
+                <h1 className={styles.card__heading}>
+                    - {handleTitle(slug)} -
+                </h1>
                 <h1 className={styles.card__heading}>Life Quality Score</h1>
                 <ul className={styles.card__ul}>
                     {score.map((item, index: number) => (
@@ -141,9 +173,26 @@ const UrbanArea = ({ img, score, salaries }: AppProps) => {
                     ))}
                 </ul>
                 <div className={styles.button__container}>
-                    <button className={styles.button} onClick={() => router.push('/')}>back</button>
+                    <button
+                        className={styles.button}
+                        onClick={() => router.push("/")}
+                    >
+                        back
+                    </button>
                 </div>
             </div>
+            {isOpen && (
+                <div className={styles.modal}>
+                    <div ref={modalRef} className={styles.modal__content}>
+                        <img
+                            src={img.mobile}
+                            alt="city"
+                            className={styles.card__image}
+                            onClick={() => setIsOpen(false)}
+                        />
+                    </div>
+                </div>
+            )}
         </>
     )
 }
