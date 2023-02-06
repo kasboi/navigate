@@ -21,3 +21,9 @@
         gap: 5rem 0;
     }
 }
+@media (max-width: 800px) {
+    .card__grid {
+        justify-content: center;
+        gap: 3rem 0;
+    }
+}
