@@ -8,6 +8,16 @@
   margin-right: 5rem;
   /* flex-basis: 40%; */
 }
+@media (max-width: 600px) {
+  .parent {
+    margin-right: 2rem;
+  }
+}
+@media (max-width: 410px) {
+  .parent {
+    margin-right: 1rem;
+  }
+}
 
 .child {
   /* background-color: blue; */

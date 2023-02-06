@@ -1,97 +1,128 @@
 .card__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.card__container{
-  background: #ffffffa1;
-  border-radius: .5rem;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 0 1.5rem 0;
-  overflow: hidden;
+.card__container {
+    background: #ffffffa1;
+    border-radius: 0.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 0 1.5rem 0;
+    overflow: hidden;
 }
 .card__heading {
-  color: #212529;
-  text-align: center;
-  margin: 1rem 0 1.5rem 0;
+    color: #212529;
+    text-align: center;
+    margin: 1rem 0 1.5rem 0;
 }
+@media screen and (max-width: 680px) {
+    .card__heading {
+        font-size: 1.7rem;
+        margin: 1.2rem 0;
+    }
+}
+
 .card__ul {
-  list-style: none;
-  /* padding: 0 1.2rem; */
-  margin-bottom: 2rem;
-  padding: 0 1.5rem;
+    list-style: none;
+    /* padding: 0 1.2rem; */
+    margin-bottom: 2rem;
+    padding: 0 1.5rem;
 }
 
 .card__li {
-  display: flex;
-  color: #343a40;
-  /* justify-content: space-between; */
-  align-items: center;
-  margin: .45rem 0;
-  /* gap: 0 1rem; */
+    display: flex;
+    color: #343a40;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin: 0.45rem 0;
+    /* gap: 0 1rem; */
+}
+@media screen and (max-width: 680px) {
+    .card__li {
+        font-size: 0.9rem;
+    }
 }
 
 .card__li_name {
-  font-size: 1rem;
-  font-weight: 600;
-  /* width: 40%; */
-  margin-right: auto;
+    font-size: 1rem;
+    font-weight: 600;
+    /* width: 40%; */
+    margin-right: auto;
 }
-
+@media screen and (max-width: 800px) {
+  .card__li_name {
+      font-size: 0.75rem;
+  }
+}
+@media screen and (max-width: 680px) {
+    .card__li_name {
+        font-size: 0.7rem;
+    }
+}
 /* SALARY */
 .salary__heading {
-  text-align: center;
-  margin-bottom: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 .salary__ul {
-  list-style: none;
-  padding: 0 1.5rem;
-  /* padding: 0 1.2rem; */
-  /* margin-bottom: 2rem; */
+    list-style: none;
+    padding: 0 1.5rem;
+    /* padding: 0 1.2rem; */
+    /* margin-bottom: 2rem; */
 }
 
 .salary__li {
-  color: #495057;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: .45rem 0;
-  padding: .2rem 0;
-  /* gap: 0 1rem; */
-  font-size: .8rem;
-  font-weight: 600;
-  border-bottom: 1px dashed #000000a1;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.45rem 0;
+    padding: 0.2rem 0;
+    /* gap: 0 1rem; */
+    font-size: 0.65rem;
+    font-weight: 600;
+    border-bottom: 1px dashed #000000a1;
+}
+@media screen and (max-width: 800px) {
+  .salary__li {
+      font-size: 0.55rem;
+  }
+}
+@media screen and (max-width: 600px) {
+    .salary__li {
+        font-size: 0.5rem;
+    }
 }
 /* 
 .salary__title {
 } */
 
 .salary__range {
-  font-size: .9rem;
-  /* font-weight: 300; */
+    font-size: 0.9rem;
+    /* font-weight: 300; */
 }
 
 .button__container {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 .button {
-  text-transform: uppercase;
-  background: transparent;
-  border: 1px solid #000000a1;
-  border-radius: .25rem;
-  padding: .5rem 1.2rem;
-  margin: 1rem 3rem 0 0;
-  font-size: .9rem;
-  font-weight: 600;
-  color: #000000a1;
-  cursor: pointer;
-  transition: all .2s ease-in-out;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid #000000a1;
+    border-radius: 0.25rem;
+    padding: 0.5rem 1.2rem;
+    margin: 1rem 3rem 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000000a1;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
 }
 
 .button:hover {
-  background: #7048e8;
-  color: white;
+    background: #7048e8;
+    color: white;
 }
