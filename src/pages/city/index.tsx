@@ -1,5 +1,7 @@
 import { useEffect } from "react"
 
+const { ProgressBar } = require("react-step-progress-bar")
+
 const Vibes = () => {
     const fetcher = async () => {
         const res = await fetch("https://api.teleport.org/api/urban_areas/")
@@ -26,7 +28,17 @@ const Vibes = () => {
     useEffect(() => {
         fetcher()
     }, [])
-    return <>Test API</>
+    return (
+        <>
+        <h2>Test</h2>
+            <ProgressBar
+                percent={80}
+                width={"100%"}
+                height={30}
+                filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+            />
+        </>
+    )
 }
 
 export default Vibes

@@ -6,6 +6,7 @@ import lagos from "../../../public/lagos.jpg"
 const { ProgressBar } = require("react-step-progress-bar")
 
 import { useState, useRef, useEffect } from "react"
+import { useRouter } from "next/router"
 import Skeleton from "../Skeleton/Skeleton"
 import MyModal from "../Modal/Modal"
 
@@ -25,12 +26,25 @@ type AppProps = {
     }[]
 }
 
+type Slug = {
+    href: string
+}
+
 const Card = ({ data }: AppProps) => {
     const [displayData, setDisplayData] = useState<DataItem[]>([])
     const [isLoading, setIsLoading] = useState(false)
+    const [btnLoading, setBtnLoading] = useState(false)
 
     const observerRef = useRef<HTMLDivElement | null>(null)
     const intersectionObserverRef = useRef<IntersectionObserver | null>(null)
+
+    const router = useRouter()
+
+    const handleSlug = (slug: Slug) => {
+        const input = slug.href.split(":").pop()
+        router.push(`/city/${input}`)
+        setBtnLoading(true)
+    }
 
     useEffect(() => {
         if (!intersectionObserverRef.current) {
@@ -119,6 +133,8 @@ const Card = ({ data }: AppProps) => {
                             <div className={styles.card__btn_parent}>
                                 <button
                                     className={styles.card__btn}
+                                    onClick={() => handleSlug(item)}
+                                    disabled={btnLoading}
                                 >
                                     More Details
                                 </button>
