@@ -10,8 +10,14 @@
     gap: 5rem 0;
 }
 
-@media (max-width: 768px) {
-    .card {
-        width: 100%;
+@media (max-width: 1240px) {
+    .card__grid {
+        gap: 3.5rem 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .card__grid {
+        gap: 5rem 0;
     }
 }
