@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { Inter } from "@next/font/google"
+
 import styles from "@/styles/Home.module.css"
 
 import "react-step-progress-bar/styles.css"
@@ -10,10 +10,11 @@ import Card from "@/components/Card/Card"
 import Skeleton from "@/components/Skeleton/Skeleton"
 
 import { useQuery } from "@tanstack/react-query"
-import Modal from "@/components/Modal/Modal"
+
 import { useState } from "react"
 
 export default function Home() {
+    // React-query hook to fetch data from the API
     const { isLoading, error, data } = useQuery({
         queryKey: ["urbanData"],
         queryFn: () =>
@@ -21,6 +22,7 @@ export default function Home() {
                 res.json()
             ),
     })
+    // State to filter the data
     const [filter, setFilter] = useState([])
 
     return (
@@ -34,18 +36,24 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            {data && (
-                <Navbar
-                    setFilter={setFilter}
-                    data={data["_links"]["ua:item"]}
-                    filter={filter}
-                />
-            )}
+            {/* Reusable Navbar component */}
+            <Navbar
+                setFilter={setFilter}
+                data={data ? data["_links"]["ua:item"] : []}
+                isLoading={isLoading}
+            />
+            {/* Reusable Header component - Primary & Secondary heading */}
             <Header />
+
+            {/* Main container */}
             <main className={styles.main}>
                 <div className={styles.card__grid}>
+                    {/* Displays a skeleton loader when the data is being fetched */}
                     {isLoading && <Skeleton />}
+
+                    {/* Displays the data when the data is fetched */}
                     {data && (
+                        // Reusable Card component
                         <Card
                             data={data["_links"]["ua:item"]}
                             filter={filter}

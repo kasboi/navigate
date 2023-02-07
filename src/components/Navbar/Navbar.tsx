@@ -13,10 +13,10 @@ type Data = {
 type AppProps = {
     setFilter: (filter: any) => void
     data: Data
-    filter: Data
+    isLoading: boolean
 }
 
-const Navbar = ({ setFilter, data, filter }: AppProps) => {
+const Navbar = ({ setFilter, data, isLoading }: AppProps) => {
     const [area, setArea] = useState("")
 
     const handleFiter = (e: any) => {
@@ -27,7 +27,6 @@ const Navbar = ({ setFilter, data, filter }: AppProps) => {
                 return item.name.toLowerCase().includes(val.toLowerCase())
             })
             setFilter(filtered)
-            console.log(filtered)
         }
     }
     return (
@@ -47,6 +46,7 @@ const Navbar = ({ setFilter, data, filter }: AppProps) => {
                             value={area}
                             onChange={(e) => handleFiter(e)}
                             placeholder="Search for area..."
+                            disabled={isLoading}
                         />
                         <MagnifyingGlassIcon
                             className={styles.nav__searchIcon}
