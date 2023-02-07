@@ -11,15 +11,18 @@ import Skeleton from "@/components/Skeleton/Skeleton"
 
 import { useQuery } from "@tanstack/react-query"
 import Modal from "@/components/Modal/Modal"
+import { useState } from "react"
 
 export default function Home() {
     const { isLoading, error, data } = useQuery({
-        queryKey: ['urbanData'],
+        queryKey: ["urbanData"],
         queryFn: () =>
-          fetch(' https://api.teleport.org/api/urban_areas/').then(
-            (res) => res.json(),
-          ),
-      })
+            fetch(" https://api.teleport.org/api/urban_areas/").then((res) =>
+                res.json()
+            ),
+    })
+    const [filter, setFilter] = useState([])
+
     return (
         <>
             <Head>
@@ -31,12 +34,24 @@ export default function Home() {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Navbar />
+            {data && (
+                <Navbar
+                    setFilter={setFilter}
+                    data={data["_links"]["ua:item"]}
+                    filter={filter}
+                />
+            )}
             <Header />
             <main className={styles.main}>
                 <div className={styles.card__grid}>
                     {isLoading && <Skeleton />}
-                    {data && <Card data={data["_links"]["ua:item"]}/>}
+                    {data && (
+                        <Card
+                            data={data["_links"]["ua:item"]}
+                            filter={filter}
+                            setFilter={setFilter}
+                        />
+                    )}
                 </div>
             </main>
             {/* <Modal /> */}

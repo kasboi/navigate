@@ -1,7 +1,35 @@
-import { AdjustmentsVerticalIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
+import {
+    AdjustmentsVerticalIcon,
+    MagnifyingGlassIcon,
+} from "@heroicons/react/24/solid"
+import { useState } from "react"
 import styles from "./Navbar.module.css"
 
-const Navbar = () => {
+type Data = {
+    href: string
+    name: string
+}[]
+
+type AppProps = {
+    setFilter: (filter: any) => void
+    data: Data
+    filter: Data
+}
+
+const Navbar = ({ setFilter, data, filter }: AppProps) => {
+    const [area, setArea] = useState("")
+
+    const handleFiter = (e: any) => {
+        const val = e.target.value
+        setArea(val)
+        if (!(area.length < 1)) {
+            const filtered = data.filter((item) => {
+                return item.name.toLowerCase().includes(val.toLowerCase())
+            })
+            setFilter(filtered)
+            console.log(filtered)
+        }
+    }
     return (
         <>
             <nav className={styles.nav}>
@@ -16,6 +44,8 @@ const Navbar = () => {
                         <input
                             type="text"
                             className={styles.nav__input}
+                            value={area}
+                            onChange={(e) => handleFiter(e)}
                             placeholder="Search for area..."
                         />
                         <MagnifyingGlassIcon

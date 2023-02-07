@@ -18,19 +18,22 @@ interface DataItem {
 interface Props {
     data: DataItem[]
 }
+type Data = {
+    href: string
+    name: string
+}[]
 
 type AppProps = {
-    data: {
-        href: string
-        name: string
-    }[]
+    data: Data
+    filter: Data
+    setFilter: (filter: any) => void
 }
 
 type Slug = {
     href: string
 }
 
-const Card = ({ data }: AppProps) => {
+const Card = ({ data, filter, setFilter }: AppProps) => {
     const [displayData, setDisplayData] = useState<DataItem[]>([])
     const [isLoading, setIsLoading] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
@@ -41,9 +44,10 @@ const Card = ({ data }: AppProps) => {
     const router = useRouter()
 
     const handleSlug = (slug: Slug) => {
+        setBtnLoading(true)
         const input = slug.href.split(":").pop()
         router.push(`/city/${input}`)
-        setBtnLoading(true)
+        setFilter([])
     }
 
     useEffect(() => {
@@ -81,7 +85,134 @@ const Card = ({ data }: AppProps) => {
 
     return (
         <>
-            {displayData.map((item, index: number) => (
+            {((filter.length < data.length) && (filter.length > 0)) ? (
+                filter.map((item, index: number) => (
+                    <div className={styles.card} key={index}>
+                        <div className={styles.card__image}>
+                            <Image
+                                src={lagos}
+                                alt="Lagos"
+                                className={styles.card__imageChild}
+                            />
+                        </div>
+                        <div className={styles.card__description}>
+                            <span className={styles.card__headColor}></span>
+                            <div className={styles.card__area}>
+                                <h1 className={styles.card__area_name}>
+                                    {item.name}
+                                </h1>
+                                <div>
+                                    <p className={styles.card__area_details}>
+                                        Life Quality Score:
+                                    </p>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Cost of living - ??</p>
+                                        <ProgressBar
+                                            percent={70}
+                                            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                                        />
+                                    </div>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Education - ??</p>
+                                        <ProgressBar
+                                            percent={50}
+                                            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                                        />
+                                    </div>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Economy - ??</p>
+                                        <ProgressBar
+                                            percent={40}
+                                            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className={styles.card__area_details}>
+                                        Average Salary:
+                                    </p>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Software Engineer - $??,000</p>
+                                    </div>
+                                </div>
+                                <div className={styles.card__btn_parent}>
+                                    <button
+                                        className={styles.card__btn}
+                                        onClick={() => handleSlug(item)}
+                                        disabled={btnLoading}
+                                    >
+                                        More Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            ): (
+                displayData.map((item, index: number) => (
+                    <div className={styles.card} key={index}>
+                        <div className={styles.card__image}>
+                            <Image
+                                src={lagos}
+                                alt="Lagos"
+                                className={styles.card__imageChild}
+                            />
+                        </div>
+                        <div className={styles.card__description}>
+                            <span className={styles.card__headColor}></span>
+                            <div className={styles.card__area}>
+                                <h1 className={styles.card__area_name}>
+                                    {item.name}
+                                </h1>
+                                <div>
+                                    <p className={styles.card__area_details}>
+                                        Life Quality Score:
+                                    </p>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Cost of living - ??</p>
+                                        <ProgressBar
+                                            percent={70}
+                                            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                                        />
+                                    </div>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Education - ??</p>
+                                        <ProgressBar
+                                            percent={50}
+                                            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                                        />
+                                    </div>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Economy - ??</p>
+                                        <ProgressBar
+                                            percent={40}
+                                            filledBackground="linear-gradient(to right, #fefb72, #f0bb31)"
+                                        />
+                                    </div>
+                                </div>
+                                <div>
+                                    <p className={styles.card__area_details}>
+                                        Average Salary:
+                                    </p>
+                                    <div className={styles.card__scoreParent}>
+                                        <p>Software Engineer - $??,000</p>
+                                    </div>
+                                </div>
+                                <div className={styles.card__btn_parent}>
+                                    <button
+                                        className={styles.card__btn}
+                                        onClick={() => handleSlug(item)}
+                                        disabled={btnLoading}
+                                    >
+                                        More Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            )}
+            {/* {displayData.map((item, index: number) => (
                 <div className={styles.card} key={index}>
                     <div className={styles.card__image}>
                         <Image
@@ -142,7 +273,7 @@ const Card = ({ data }: AppProps) => {
                         </div>
                     </div>
                 </div>
-            ))}
+            ))} */}
             {/* <MyModal isOpen={isOpen} setIsOpen={setIsOpen} slug={slug} /> */}
             {isLoading && <Skeleton />}
             <div ref={observerRef} style={{ height: "1px", width: "1px" }} />

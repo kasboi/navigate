@@ -59,6 +59,7 @@ body {
     font-weight: 400;
     background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
     padding: 1rem 5rem;
+    min-height: 100vh;
 }
 
 @media (max-width: 1240px) {

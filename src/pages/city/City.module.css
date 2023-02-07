@@ -152,10 +152,10 @@
     transition: all 0.3s ease-in-out;
 }
 .modal__content {
-    background: #fff;
+    background: gold;
     width: 90%;
     max-width: 500px;
-    padding: .35rem;
+    padding: .25rem;
     border-radius: 0.5rem;
     position: relative;
     text-align: center;
