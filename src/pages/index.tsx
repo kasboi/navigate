@@ -13,18 +13,19 @@ import { useQuery } from "@tanstack/react-query"
 
 import { useState } from "react"
 
+// Fetch all urban areas
 const fetchAllUrbanAreas = async () => {
     const res = await fetch("https://api.teleport.org/api/urban_areas/")
     return res.json()
 }
-
+// Fetch Africa urban areas
 const fetchAfricaUrbanAreas = async () => {
     const res = await fetch(
         "https://api.teleport.org/api/continents/geonames:AF/urban_areas/"
     )
     return res.json()
 }
-
+// Home page
 export default function Home() {
     //Show Africa data
     const [showAfrica, setShowAfrica] = useState(false)

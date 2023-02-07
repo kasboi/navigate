@@ -6,6 +6,7 @@ import { GetServerSideProps } from "next"
 import ProgressBar from "@/components/ProgressBar/ProgressBar"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
+import Head from "next/head"
 
 // type declaration for city image
 type Image = {
@@ -117,7 +118,7 @@ const UrbanArea = ({ img, score, salaries }: AppProps) => {
     const handleTitle = (title: any): string => {
         return title.charAt(0).toUpperCase() + title.slice(1)
     }
-
+    // hook to handle modal close button
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside)
         return () => {
@@ -127,7 +128,18 @@ const UrbanArea = ({ img, score, salaries }: AppProps) => {
 
     return (
         <>
+            {/* Meta Information */}
+            <Head>
+                <title>City - Urban Area</title>
+                <meta name="description" content="Teleport Open API" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header />
+
             <div className={styles.card__container}>
                 <img
                     src={img.web}
