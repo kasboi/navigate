@@ -156,13 +156,6 @@ const Card = ({ data, filter, setFilter, showAfrica }: AppProps) => {
                             >
                                 More Details
                             </Link>
-                            {/* <a
-                                className={styles.card__btn}
-                                // onClick={() => handleSlug(item)}
-                                // disabled={btnLoading}
-                            >
-                                More Details
-                            </a> */}
                         </div>
                     </div>
                 </div>
