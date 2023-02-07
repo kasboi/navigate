@@ -161,9 +161,9 @@
 
 .card__btn {
     color: #845ef79a;
-    border: 1px solid #845ef7;
-    padding: 0.5rem 1.5rem;
-    font-size: 1.1rem;
+    border: 1px solid #7b58e4;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
     font-weight: 500;
     cursor: pointer;
     transition: all ease-in-out 0.25s;

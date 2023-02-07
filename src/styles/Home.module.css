@@ -1,6 +1,9 @@
 /*
   GRID STYLES
 */
+.main {
+    padding-bottom: 5rem;
+}
 .card__grid {
     display: flex;
     justify-content: space-between;

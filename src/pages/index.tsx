@@ -13,14 +13,36 @@ import { useQuery } from "@tanstack/react-query"
 
 import { useState } from "react"
 
+const fetchAllUrbanAreas = async () => {
+    const res = await fetch("https://api.teleport.org/api/urban_areas/")
+    return res.json()
+}
+
+const fetchAfricaUrbanAreas = async () => {
+    const res = await fetch(
+        "https://api.teleport.org/api/continents/geonames:AF/urban_areas/"
+    )
+    return res.json()
+}
+
 export default function Home() {
+    //Show Africa data
+    const [showAfrica, setShowAfrica] = useState(false)
+    const [areaData, setAreaData] = useState([])
+
     // React-query hook to fetch data from the API
     const { isLoading, error, data } = useQuery({
         queryKey: ["urbanData"],
-        queryFn: () =>
-            fetch(" https://api.teleport.org/api/urban_areas/").then((res) =>
-                res.json()
-            ),
+        queryFn: fetchAllUrbanAreas,
+    })
+    // Africa
+    const {
+        isLoading: africaLoading,
+        error: africaError,
+        data: africaData,
+    } = useQuery({
+        queryKey: ["africaData"],
+        queryFn: fetchAfricaUrbanAreas,
     })
     // State to filter the data
     const [filter, setFilter] = useState([])
@@ -41,6 +63,8 @@ export default function Home() {
                 setFilter={setFilter}
                 data={data ? data["_links"]["ua:item"] : []}
                 isLoading={isLoading}
+                showAfrica={showAfrica}
+                setshowAfrica={setShowAfrica}
             />
             {/* Reusable Header component - Primary & Secondary heading */}
             <Header />
@@ -52,12 +76,17 @@ export default function Home() {
                     {isLoading && <Skeleton />}
 
                     {/* Displays the data when the data is fetched */}
-                    {data && (
+                    {data && africaData && (
                         // Reusable Card component
                         <Card
-                            data={data["_links"]["ua:item"]}
+                            data={
+                                showAfrica
+                                    ? africaData["_links"]["ua:items"]
+                                    : data["_links"]["ua:item"]
+                            }
                             filter={filter}
                             setFilter={setFilter}
+                            showAfrica={showAfrica}
                         />
                     )}
                 </div>
