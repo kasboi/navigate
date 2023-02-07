@@ -6,59 +6,51 @@ import lagos from "../../../public/lagos.jpg"
 const { ProgressBar } = require("react-step-progress-bar")
 
 import { useState, useRef, useEffect } from "react"
-import { useRouter } from "next/router"
+
 import Skeleton from "../Skeleton/Skeleton"
-import MyModal from "../Modal/Modal"
+
 import Link from "next/link"
 
+//type declaration for each data
 interface DataItem {
     name: string
     href: string
 }
-
-interface Props {
-    data: DataItem[]
-}
+// type declaration for props
 type Data = {
     href: string
     name: string
 }[]
-
+// type declaration for props
 type AppProps = {
     data: Data
     filter: Data
     setFilter: (filter: any) => void
     showAfrica: boolean
 }
-
+// type declaration for slug(i.e city name)
 type Slug = {
     href: string
 }
-
+// Card component to display each city data
 const Card = ({ data, filter, setFilter, showAfrica }: AppProps) => {
-    const [displayData, setDisplayData] = useState<DataItem[]>([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [btnLoading, setBtnLoading] = useState(false)
 
+    // state to hold data to be displayed and loading state for infinite scroll
+    const [displayData, setDisplayData] = useState<DataItem[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
+    // refs for infinite scroll and intersection observer
     const observerRef = useRef<HTMLDivElement | null>(null)
     const intersectionObserverRef = useRef<IntersectionObserver | null>(null)
 
-    const router = useRouter()
-
-    const handleSlug = (slug: Slug) => {
-        setBtnLoading(true)
-        const input = slug.href.split(":").pop()
-        router.push(`/city/${input}`)
-        setFilter([])
-    }
-
+    // function to decode city name from slug to be used in link
     const handleLink = (slug: Slug) => {
         const input = slug.href.split(":").pop()
         return input
     }
 
+    // useEffect to handle infinite scroll
     useEffect(() => {
-        console.log("filter", filter)
         if (!intersectionObserverRef.current) {
             intersectionObserverRef.current = new IntersectionObserver(
                 (entries) => {
@@ -77,13 +69,13 @@ const Card = ({ data, filter, setFilter, showAfrica }: AppProps) => {
                 { root: null, rootMargin: "0px", threshold: 1.0 }
             )
         }
-
+        // get the current observer
         const currentObserver = intersectionObserverRef.current
-
+        // observe the ref element
         if (observerRef.current) {
             currentObserver.observe(observerRef.current)
         }
-
+        // clean up function
         return () => {
             if (currentObserver) {
                 currentObserver.disconnect()
@@ -93,14 +85,20 @@ const Card = ({ data, filter, setFilter, showAfrica }: AppProps) => {
 
     return (
         <>
+            {/* display filtered data only */}
             {filter.length > 0 && filterData(filter)}
+            {/* display data from Africa only */}
             {!(filter.length > 0) && !showAfrica && filterData(displayData)}
+            {/* display all data */}
             {!(filter.length > 0) && showAfrica && filterData(data)}
+            {/* display skeleton loader on reaching end of page */}
             {isLoading && <Skeleton />}
+            {/* div to observe intersection */}
             <div ref={observerRef} style={{ height: "1px", width: "1px" }} />
         </>
     )
-
+    
+    // function to display data
     function filterData(data: any) {
         return data.map((item: any, index: number) => (
             <div className={styles.card} key={index}>

@@ -1,5 +1,6 @@
 import styles from "./Header.module.css"
 
+// Reusable header component to display header
 const Header = () => {
     return (
         <>

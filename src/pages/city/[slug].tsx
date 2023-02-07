@@ -7,17 +7,18 @@ import ProgressBar from "@/components/ProgressBar/ProgressBar"
 import Image from "next/image"
 import { useState, useRef, useEffect } from "react"
 
+// type declaration for city image
 type Image = {
     web: string
     mobile: string
 }
-
+// type declaration for props - city score
 type Score = {
     name: string
     score_out_of_10: number
     color: string
 }[]
-
+// type declaration for props - city avg. salaries
 type Salaries = {
     job: {
         name: string
@@ -30,13 +31,13 @@ type Salaries = {
         percentile_75: number
     }
 }[]
-
+// type declaration for props
 type AppProps = {
     img: Image
     score: Score
     salaries: Salaries
 }
-
+// function to fetch city image
 const fetchImage = async (slug: string) => {
     const res = await fetch(
         `https://api.teleport.org/api/urban_areas/slug:${slug}/images/`
@@ -48,7 +49,7 @@ const fetchImage = async (slug: string) => {
         mobile: data.photos[0].image.mobile,
     }
 }
-
+// function to fetch city score
 const fetchScore = async (slug: string) => {
     const res = await fetch(
         `https://api.teleport.org/api/urban_areas/slug:${slug}/scores`
@@ -56,7 +57,7 @@ const fetchScore = async (slug: string) => {
     const data = await res.json()
     return data.categories
 }
-
+// function to fetch city avg. salaries
 const fetchSalaries = async (slug: string) => {
     const res = await fetch(
         `https://api.teleport.org/api/urban_areas/slug:${slug}/salaries/`
@@ -64,14 +65,14 @@ const fetchSalaries = async (slug: string) => {
     const data = await res.json()
     return data.salaries
 }
-
+// function to convert number to appropriate currency format
 const handleCurrency = (num: number) => {
     return num.toLocaleString("en-US", {
         style: "currency",
         currency: "USD",
     })
 }
-
+// gets data from api on server side
 export const getServerSideProps: GetServerSideProps<{
     img: Image
     score: Score
@@ -93,14 +94,17 @@ export const getServerSideProps: GetServerSideProps<{
         },
     }
 }
-
+// renders fetched data to page
 const UrbanArea = ({ img, score, salaries }: AppProps) => {
+    // gets slug from url
     const router = useRouter()
     const { slug } = router.query
 
+    // modal state and ref
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const modalRef = useRef<HTMLDivElement>(null)
 
+    // function to close modal when clicking outside of modal
     const handleClickOutside = (event: MouseEvent) => {
         if (
             modalRef.current &&
@@ -109,7 +113,7 @@ const UrbanArea = ({ img, score, salaries }: AppProps) => {
             setIsOpen(false)
         }
     }
-
+    // function to capitalize first letter of city name
     const handleTitle = (title: any): string => {
         return title.charAt(0).toUpperCase() + title.slice(1)
     }
