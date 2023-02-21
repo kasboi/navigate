@@ -101,7 +101,7 @@ const Card = ({ data, filter, setFilter, showAfrica }: AppProps) => {
     // function to display data
     function filterData(data: any) {
         return data.map((item: any, index: number) => (
-            <div className={styles.card} key={index}>
+            <div className={styles.card} key={index} data-testid="card-container">
                 <div className={styles.card__image}>
                     <Image
                         src={lagos}

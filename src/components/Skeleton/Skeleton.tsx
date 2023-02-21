@@ -12,7 +12,7 @@ const Skeleton = () => {
         <>
           {
             seet.map((item: any, index: number) => (
-            <div className={styles.card} key={index+1}>
+            <div className={styles.card} key={index+1} data-testid="skeleton-card">
                 <div className={`${styles.card__image} ${styles.loading}`}>
                     {/* <Image
                         src={lagos}
